@@ -21,11 +21,11 @@ public class EmployeeService {
     public Response<Employee> save(EmployeeRequestSaveDto employeeRequestSaveDto) {
         return Response.result(employeeRepository.save(
                 Employee.builder()
-                .name(employeeRequestSaveDto.getName())
-                .birthDate(employeeRequestSaveDto.getBirthDate())
-                .address(employeeRequestSaveDto.getAddress())
-                .birthPlace(employeeRequestSaveDto.getBirthPlace())
-                .mobilePhone(employeeRequestSaveDto.getMobilePhone())
-                .build()));
+                        .name(employeeRequestSaveDto.getName())
+                        .birthDate(employeeRequestSaveDto.getBirthDate())
+                        .address(employeeRequestSaveDto.getAddress())
+                        .birthPlace(employeeRequestSaveDto.getBirthPlace())
+                        .mobilePhone(employeeRequestSaveDto.getMobilePhone())
+                        .build()));
     }
 }

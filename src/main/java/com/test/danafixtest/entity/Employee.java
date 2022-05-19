@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -29,4 +30,5 @@ public class Employee {
     private String address;
 
     private String mobilePhone;
+
 }

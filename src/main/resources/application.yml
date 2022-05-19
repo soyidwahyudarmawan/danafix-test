@@ -2,10 +2,9 @@ spring:
   application:
     name: danafix
   datasource:
-    url: jdbc:h2:mem:mydb
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/danafix-test
+    username: postgres
+    password: root
 
 server:
   port: 8282
