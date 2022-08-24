@@ -1,39 +1,31 @@
-package com.test.danafixtest.entity;
+package com.test.danafixtest.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "employee")
-@Builder(toBuilder = true)
-public class Employee {
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    @Column(name = "id", length = 36, updatable = false, nullable = false)
+@Builder
+public class EmployeeResponseDto {
     private String id;
-
     private String name;
 
     private String birthPlace;
-
+    
     private LocalDate birthDate;
 
     private String address;
 
     private String mobilePhone;
-
 }
