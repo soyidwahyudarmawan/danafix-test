@@ -1,10 +1,14 @@
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
   application:
     name: danafix
   datasource:
     url: jdbc:postgresql://localhost:5432/danafix-test
+    driverClassName: org.postgresql.Driver
     username: postgres
-    password: root
+    password: wahyu
 
 server:
   port: 8282
