@@ -9,8 +9,16 @@ spring:
     driverClassName: org.postgresql.Driver
     username: postgres
     password: wahyu
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
 server:
   port: 8282
   servlet:
     context-path: /danafix
+
+setting:
+  cache:
+    redis:
+      time-to-live: 5

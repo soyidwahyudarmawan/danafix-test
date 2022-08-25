@@ -11,13 +11,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EmployeeResponseDto {
+public class EmployeeResponseDto implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String id;
     private String name;
 

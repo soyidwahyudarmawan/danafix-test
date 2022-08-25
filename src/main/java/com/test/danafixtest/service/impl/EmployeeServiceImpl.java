@@ -9,6 +9,9 @@ import com.test.danafixtest.repository.EmployeeRepository;
 import com.test.danafixtest.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,18 +32,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeMapper employeeMapper;
 
     @Override
+    @Cacheable("employeeIdCache")
     public List<EmployeeResponseDto> findEmployeesById(String id) {
         var listEmployee = employeeRepository.findEmployeeById(id);
         return listEmployee.stream().map(employeeMapper::responseEmployee).collect(Collectors.toList());
     }
 
     @Override
+    @Cacheable("employeeCache")
     public List<EmployeeResponseDto> findAll() {
         var listEmployee = employeeRepository.findAllEmployee();
         return listEmployee.stream().map(employeeMapper ::responseEmployee).collect(Collectors.toList());
     }
 
     @Override
+    @CachePut(value="employeeServiceImpl",key = "#id", condition = "#result != null ")
     public EmployeeResponseDto createEmployee(EmployeeRequestSaveDto request) {
         var employee = employeeMapper.requestEmployee(request);
         var result = employeeRepository.save(employee);
@@ -48,6 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @CachePut(value="employeeServiceImpl",key = "#id", condition = "#result != null ")
     public EmployeeResponseDto updateEmployee(String id, EmployeeRequestSaveDto request) {
         var employeeCheck = employeeRepository.findEmployeeById(id);
         var employeeUpdate = employeeCheck.get(0);
@@ -57,6 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @CacheEvict(value="employeeServiceImpl",key = "#id")
     public ResponseEntity<HttpStatus> deleteEmployee(String id) {
         try {
             employeeRepository.deleteById(id);
@@ -67,6 +75,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Cacheable("employeeYearCache")
     public List<EmployeeResponseDto> findEmployeesByYear(LocalDate birthDate) {
         var listEmployee = employeeRepository.findEmployeeByYear(birthDate);
         return listEmployee.stream().map(employeeMapper::responseEmployee).collect(Collectors.toList());
