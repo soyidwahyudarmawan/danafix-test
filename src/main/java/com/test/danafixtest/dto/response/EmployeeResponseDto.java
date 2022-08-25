@@ -22,7 +22,7 @@ public class EmployeeResponseDto {
     private String name;
 
     private String birthPlace;
-    
+
     private LocalDate birthDate;
 
     private String address;

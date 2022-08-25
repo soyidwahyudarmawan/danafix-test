@@ -25,10 +25,9 @@ public class EmployeeRequestSaveDto {
     @NotNull
     private String birthPlace;
 
-    String str = "13/11/2020";
-
     @NotNull
-    private LocalDate birthDate = LocalDate.parse(str, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate birthDate;
 
     @NotNull
     private String address;
