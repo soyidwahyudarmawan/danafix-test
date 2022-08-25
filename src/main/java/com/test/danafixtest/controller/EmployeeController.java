@@ -28,8 +28,9 @@ public class EmployeeController {
         return  employeeService.findEmployeesById(id);
     }
 
-    @GetMapping(value = "/employee/year/{birthDate}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<EmployeeResponseDto> findEmployeesByYear(@PathVariable LocalDate birthDate){
+    @GetMapping(value = "/employee/year", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<EmployeeResponseDto> findEmployeesByYear(@RequestParam("birthDate")
+                                                          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate birthDate){
         return employeeService.findEmployeesByYear(birthDate);
     }
 
