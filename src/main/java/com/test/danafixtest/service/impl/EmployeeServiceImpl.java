@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,18 +27,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeMapper employeeMapper;
-
-    @Override
-    public Response<Employee> save(EmployeeRequestSaveDto employeeRequestSaveDto) {
-        return Response.result(employeeRepository.save(
-                Employee.builder()
-                        .name(employeeRequestSaveDto.getName())
-                        .birthDate(employeeRequestSaveDto.getBirthDate())
-                        .address(employeeRequestSaveDto.getAddress())
-                        .birthPlace(employeeRequestSaveDto.getBirthPlace())
-                        .mobilePhone(employeeRequestSaveDto.getMobilePhone())
-                        .build()));
-    }
 
     @Override
     public List<EmployeeResponseDto> findEmployeesById(String id) {
@@ -75,5 +64,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Override
+    public List<EmployeeResponseDto> findEmployeesByYear(LocalDate birthDate) {
+        var listEmployee = employeeRepository.findEmployeeByYear(birthDate);
+        return listEmployee.stream().map(employeeMapper::responseEmployee).collect(Collectors.toList());
     }
 }

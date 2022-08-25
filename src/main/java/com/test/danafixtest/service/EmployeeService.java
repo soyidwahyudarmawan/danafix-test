@@ -7,13 +7,14 @@ import com.test.danafixtest.entity.Employee;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface EmployeeService {
-    public Response<Employee> save(EmployeeRequestSaveDto employeeRequestSaveDto);
     List<EmployeeResponseDto> findEmployeesById(String id);
     List<EmployeeResponseDto> findAll();
     EmployeeResponseDto createEmployee(EmployeeRequestSaveDto request);
     EmployeeResponseDto updateEmployee(String id, EmployeeRequestSaveDto request);
     ResponseEntity<HttpStatus> deleteEmployee(String id);
+    List<EmployeeResponseDto> findEmployeesByYear(LocalDate birthDate);
 }
